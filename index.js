@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const Joi = require('joi');
+const config = require('config');
 const app = express();
 
 // Middlewares
@@ -13,6 +14,10 @@ if(app.get('env') === 'development'){
   app.use(morgan('tiny'));
   console.log('morgan enable...development environment')
 }
+
+// Configuration
+console.log('Application name', config.get('name'));
+console.log('Mail server', config.get('mail').host);
 
 const courses = [
   {id: 1, name: 'course1'},
