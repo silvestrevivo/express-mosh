@@ -1,8 +1,18 @@
 const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
 const Joi = require('joi');
 const app = express();
 
+// Middlewares
 app.use(express.json());
+app.use(express.urlencoded());
+app.use(helmet());
+
+if(app.get('env') === 'development'){
+  app.use(morgan('tiny'));
+  console.log('morgan enable...development environment')
+}
 
 const courses = [
   {id: 1, name: 'course1'},
